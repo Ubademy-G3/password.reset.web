@@ -30,13 +30,12 @@ jobs:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     needs: [eslint]
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+            heroku_app_name: "password-reset-app" #Must be unique in Heroku
+            heroku_email: "daniela.leloutre@gmail.com"
+            usedocker: false
 
-      - name: Log in to Heroku Container Registry
-        run: heroku container:login
-        
-      - name: Configure Heroku
-        run: heroku config:set GIT_HASH=${GITHUB_SHA} GIT_BRANCH=${GITHUB_REF} --app password-reset-app
-        
-      - name: Push to Heroku
-        run: git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/password-reset-app.git $GITHUB_SHA:refs/heads/main
+     

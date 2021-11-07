@@ -38,7 +38,5 @@ jobs:
       - name: Configure Heroku
         run: heroku config:set GIT_HASH=${GITHUB_SHA} GIT_BRANCH=${GITHUB_REF} --app password-reset-app
         
-      - run: git filter-branch -- --all
-        
       - name: Push to Heroku
         run: git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/password-reset-app.git $GITHUB_SHA:refs/heads/main

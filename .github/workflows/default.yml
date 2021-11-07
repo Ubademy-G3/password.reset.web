@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linter
+        run: npm run lint 
+  deploy: 
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    needs: [eslint]
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Log in to Heroku Container Registry
+        run: heroku container:login
+        
+      - name: Push to Heroku
+        run: git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/password-reset-app.git $GITHUB_SHA:master

@@ -54,7 +54,7 @@ export default function ResetPassword() {
     setData({ ...data, isLoading: true });
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_AUTH_SERVICE_URL}/password-reset/${userId}/${token}`,
+        `${process.env.REACT_APP_AUTH_SERVICE_URL}/authentication/password/${userId}/${token}`,
         {
           password: data.password,
         },

@@ -5,6 +5,9 @@
 * NodeJS
 * npm
 
+### Environment Variables
+REACT_APP_AUTH_SERVICE_URL={your_url_here}
+
 ## Install Dependencies
 
 `npm install`

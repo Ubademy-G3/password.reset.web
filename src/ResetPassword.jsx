@@ -54,7 +54,7 @@ export default function ResetPassword() {
     setData({ ...data, isLoading: true });
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_AUTH_SERVICE_URL}/authentication/password/${userId}/${token}`,
+        `${process.env.REACT_APP_GATEWAY_URL}/authentication/password/${userId}/${token}`,
         {
           password: data.password,
         },
@@ -63,6 +63,7 @@ export default function ResetPassword() {
         setData({
           ...data, updated: true, error: false, isLoading: false,
         });
+        axios.patch(`${process.env.REACT_APP_GATEWAY_URL}/users/${userId}`, { passwordChanged: 1 });
       } else {
         setData({
           ...data, updated: false, error: true, isLoading: false,

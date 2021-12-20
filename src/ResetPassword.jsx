@@ -63,7 +63,7 @@ export default function ResetPassword() {
         setData({
           ...data, updated: true, error: false, isLoading: false,
         });
-        axios.patch(`${process.env.REACT_APP_GATEWAY_URL}/users/${userId}`, { passwordChanged: 1 }, { headers: { authorization: token }});
+        axios.patch(`${process.env.REACT_APP_GATEWAY_URL}/users/${userId}`, { passwordChanged: 1 }, { headers: { authorization: token } });
       } else {
         setData({
           ...data, updated: false, error: true, isLoading: false,

@@ -47,7 +47,7 @@ Service dedicated to resetting passwords in case a user has forgotten them
 * npm
 
 ### Environment Variables
-REACT_APP_AUTH_SERVICE_URL={your_url_here}
+REACT_APP_GATEWAY_URL={your_url_here}
 
 ## Install Dependencies
 
